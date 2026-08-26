@@ -83,3 +83,22 @@ or enter its full path in the Recording Engine panel. It captures the desktop wi
 Windows `gdigrab`, encodes H.264/AAC MP4, supports pause/resume/stop, and writes to
 the configured output folder. A DirectShow microphone device name can be entered
 for audio input. The UI only shows `RECORDING` after FFmpeg starts successfully.
+
+## Companion website and Python tools
+
+The static companion site is in [`website/`](website/). Open
+[`website/index.html`](website/index.html) locally, or deploy the folder to any
+static host. It contains responsive product documentation, real release and
+issue links, setup guidance, and a local-only demo that does not claim to record.
+
+The dependency-free Python diagnostic utility is in
+[`tools/media_probe.py`](tools/media_probe.py). It checks `ffmpeg` and `ffprobe`
+on `PATH` and can inspect a media file as JSON:
+
+```bash
+python tools/media_probe.py
+python tools/media_probe.py path/to/recording.mp4
+```
+
+Python is an optional developer and support tool; the Windows recorder remains a
+native C# WPF application and does not require Python.
