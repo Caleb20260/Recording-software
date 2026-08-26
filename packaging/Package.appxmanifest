@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+         xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+         xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
+         IgnorableNamespaces="uap uap10">
+  <!-- Replace Name and Publisher with the identity reserved in Partner Center. -->
+  <Identity Name="LubbInteractiveCreator"
+            Publisher="CN=Lubb Interactive"
+            Version="0.2.0.0" />
+  <Properties>
+    <DisplayName>Lubb Interactive Creator</DisplayName>
+    <PublisherDisplayName>Lubb Interactive</PublisherDisplayName>
+    <Description>Professional creator recording and broadcasting software.</Description>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+  <Resources>
+    <Resource Language="en-us" />
+  </Resources>
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.19041.0" MaxVersionTested="10.0.26100.0" />
+  </Dependencies>
+  <Applications>
+    <Application Id="App" Executable="LubbInteractiveCreator.exe" EntryPoint="Windows.FullTrustApplication"
+           uap10:RuntimeBehavior="packagedClassicApp" uap10:TrustLevel="mediumIL">
+      <uap:VisualElements AppListEntry="none"
+                          DisplayName="Lubb Interactive Creator"
+                          Description="Professional creator recording and broadcasting software."
+                          Square150x150Logo="Assets\Square150x150Logo.png"
+                          Square44x44Logo="Assets\Square44x44Logo.png">
+        <uap:DefaultTile Square150x150Logo="Assets\Square150x150Logo.png" />
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+    <DeviceCapability Name="microphone" />
+    <DeviceCapability Name="webcam" />
+  </Capabilities>
+</Package>

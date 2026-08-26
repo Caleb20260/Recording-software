@@ -1,0 +1,146 @@
+<Window x:Class="LubbInteractiveCreator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Lubb Interactive Creator"
+        Width="1440" Height="900" MinWidth="760" MinHeight="620"
+        UseLayoutRounding="True" SnapsToDevicePixels="True"
+        Background="{StaticResource WindowBrush}"
+        WindowStartupLocation="CenterScreen">
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="224" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+
+    <Border Grid.Column="0" Background="#0D1115" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,1,0">
+      <DockPanel Margin="24,28">
+        <StackPanel DockPanel.Dock="Top">
+          <TextBlock Text="LUBB" FontSize="30" FontWeight="Bold" Foreground="{StaticResource AccentBrush}" />
+          <TextBlock Text="INTERACTIVE" FontSize="11" FontWeight="SemiBold" Foreground="{StaticResource MutedTextBrush}" Margin="2,-2,0,34" />
+          <TextBlock Text="WORKSPACE" FontSize="10" FontWeight="Bold" Foreground="{StaticResource MutedTextBrush}" Margin="0,0,0,12" />
+          <Button Content="HOME" HorizontalContentAlignment="Left" Background="{StaticResource AccentBrush}" Foreground="#0D1115" BorderThickness="0" />
+          <Button Content="CREATOR" HorizontalContentAlignment="Left" />
+          <Button Content="SCENES" HorizontalContentAlignment="Left" />
+          <Button Content="AUDIO" HorizontalContentAlignment="Left" />
+          <Button Content="RECORDING" HorizontalContentAlignment="Left" />
+          <Button Content="STREAMING" HorizontalContentAlignment="Left" />
+          <Button Content="CLIPS &amp; EDITOR" HorizontalContentAlignment="Left" />
+          <Button Content="MEDIA" HorizontalContentAlignment="Left" />
+          <TextBlock Text="SERVICES" FontSize="10" FontWeight="Bold" Foreground="{StaticResource MutedTextBrush}" Margin="0,26,0,12" />
+          <Button Content="XBOX HUB" HorizontalContentAlignment="Left" Command="{Binding ConnectXboxCommand}" />
+          <Button Content="DISCORD HUB" HorizontalContentAlignment="Left" Command="{Binding ConnectDiscordCommand}" />
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Bottom">
+          <Button Content="SECURITY &amp; PRIVACY" HorizontalContentAlignment="Left" Command="{Binding PrivacyCommand}" />
+          <Button Content="SETTINGS" HorizontalContentAlignment="Left" />
+          <TextBlock Text="EST. 2026" FontSize="10" Foreground="{StaticResource MutedTextBrush}" Margin="2,14,0,0" />
+        </StackPanel>
+      </DockPanel>
+    </Border>
+
+    <Grid Grid.Column="1" Margin="42,30,42,28">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="Auto" />
+      </Grid.RowDefinitions>
+
+      <Grid Grid.Row="0" Margin="0,0,0,34">
+        <StackPanel>
+          <TextBlock Text="CREATOR HOME" FontSize="12" FontWeight="Bold" Foreground="{StaticResource AccentBrush}" />
+          <TextBlock Text="Good to see you." FontSize="31" FontWeight="SemiBold" Margin="0,4,0,0" />
+          <TextBlock Text="Build your next session from one calm workspace." FontSize="14" Foreground="{StaticResource MutedTextBrush}" Margin="0,4,0,0" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+          <Button Content="NEW PROJECT" Command="{Binding NewProjectCommand}" Background="{StaticResource AccentBrush}" Foreground="#0D1115" BorderThickness="0" />
+          <Button Content="SAVE PROJECT" Command="{Binding SaveProjectCommand}" />
+        </StackPanel>
+      </Grid>
+
+      <Border Grid.Row="1" Background="#142B2C" BorderBrush="#275958" BorderThickness="1" Padding="20" Margin="0,0,0,26">
+        <Grid>
+          <StackPanel>
+            <TextBlock Text="CURRENT PROJECT" FontSize="10" FontWeight="Bold" Foreground="{StaticResource AccentBrush}" />
+            <TextBlock Text="{Binding ProjectName}" FontSize="20" FontWeight="SemiBold" Margin="0,5,0,0" />
+            <TextBlock Text="Gaming scene  |  Default Profile" FontSize="12" Foreground="{StaticResource MutedTextBrush}" Margin="0,4,0,0" />
+          </StackPanel>
+          <TextBlock Text="READY TO BUILD" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="11" FontWeight="Bold" Foreground="{StaticResource AccentBrush}" />
+        </Grid>
+      </Border>
+
+      <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+          <TextBlock Text="SESSION STATUS" FontSize="12" FontWeight="Bold" Foreground="{StaticResource MutedTextBrush}" Margin="0,0,0,12" />
+          <UniformGrid Columns="5" Margin="0,0,0,30">
+            <Border Background="{StaticResource PanelBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="16" Margin="0,0,10,0">
+              <StackPanel><TextBlock Text="RECORDING" FontSize="11" Foreground="{StaticResource MutedTextBrush}" /><TextBlock Text="{Binding RecordingStatus}" FontSize="21" FontWeight="SemiBold" Foreground="{StaticResource AccentBrush}" Margin="0,8,0,0" /></StackPanel>
+            </Border>
+            <Border Background="{StaticResource PanelBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="16" Margin="0,0,10,0">
+              <StackPanel><TextBlock Text="STREAMING" FontSize="11" Foreground="{StaticResource MutedTextBrush}" /><TextBlock Text="{Binding StreamingStatus}" FontSize="21" FontWeight="SemiBold" Foreground="{StaticResource MutedTextBrush}" Margin="0,8,0,0" /></StackPanel>
+            </Border>
+            <Border Background="{StaticResource PanelBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="16" Margin="0,0,10,0">
+              <StackPanel><TextBlock Text="REPLAY" FontSize="11" Foreground="{StaticResource MutedTextBrush}" /><TextBlock Text="{Binding ReplayStatus}" FontSize="21" FontWeight="SemiBold" Foreground="{StaticResource WarningBrush}" Margin="0,8,0,0" /></StackPanel>
+            </Border>
+            <Border Background="{StaticResource PanelBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="16" Margin="0,0,10,0">
+              <StackPanel><TextBlock Text="XBOX" FontSize="11" Foreground="{StaticResource MutedTextBrush}" /><TextBlock Text="{Binding XboxStatus}" FontSize="21" FontWeight="SemiBold" Foreground="{StaticResource MutedTextBrush}" Margin="0,8,0,0" /></StackPanel>
+            </Border>
+            <Border Background="{StaticResource PanelBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="16">
+              <StackPanel><TextBlock Text="DISCORD" FontSize="11" Foreground="{StaticResource MutedTextBrush}" /><TextBlock Text="{Binding DiscordStatus}" FontSize="17" FontWeight="SemiBold" Foreground="{StaticResource MutedTextBrush}" Margin="0,8,0,0" /></StackPanel>
+            </Border>
+          </UniformGrid>
+
+          <Grid>
+            <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Margin="0,0,22,0">
+              <TextBlock Text="QUICK ACTIONS" FontSize="12" FontWeight="Bold" Foreground="{StaticResource MutedTextBrush}" Margin="0,0,0,12" />
+              <WrapPanel>
+                <Button Content="START RECORDING" Command="{Binding StartRecordingCommand}" Background="{StaticResource AccentBrush}" Foreground="#0D1115" BorderThickness="0" />
+                <Button Content="GO LIVE" Command="{Binding GoLiveCommand}" />
+                <Button Content="SAVE REPLAY" Command="{Binding SaveReplayCommand}" />
+                <Button Content="CREATE CLIP" Command="{Binding CreateClipCommand}" />
+              </WrapPanel>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+              <TextBlock Text="SYSTEM" FontSize="12" FontWeight="Bold" Foreground="{StaticResource MutedTextBrush}" Margin="0,0,0,12" />
+              <Border Background="{StaticResource PanelBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="18">
+                <Grid>
+                  <Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition /><ColumnDefinition /></Grid.ColumnDefinitions>
+                  <StackPanel Grid.Column="0"><TextBlock Text="CPU" Foreground="{StaticResource MutedTextBrush}" FontSize="11" /><TextBlock Text="--" FontSize="20" Margin="0,5,0,0" /></StackPanel>
+                  <StackPanel Grid.Column="1"><TextBlock Text="GPU" Foreground="{StaticResource MutedTextBrush}" FontSize="11" /><TextBlock Text="--" FontSize="20" Margin="0,5,0,0" /></StackPanel>
+                  <StackPanel Grid.Column="2"><TextBlock Text="STORAGE" Foreground="{StaticResource MutedTextBrush}" FontSize="11" /><TextBlock Text="--" FontSize="20" Margin="0,5,0,0" /></StackPanel>
+                </Grid>
+              </Border>
+            </StackPanel>
+          </Grid>
+
+          <TextBlock Text="SECURITY CENTER" FontSize="12" FontWeight="Bold" Foreground="{StaticResource MutedTextBrush}" Margin="0,30,0,12" />
+          <Border Background="{StaticResource PanelBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="18">
+            <Grid>
+              <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="*" /><ColumnDefinition Width="*" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+              <StackPanel Grid.Column="0"><TextBlock Text="APPLICATION" FontSize="10" Foreground="{StaticResource MutedTextBrush}" /><TextBlock Text="{Binding Security.ApplicationIntegrity}" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource AccentBrush}" Margin="0,6,0,0" /></StackPanel>
+              <StackPanel Grid.Column="1"><TextBlock Text="PLUGINS" FontSize="10" Foreground="{StaticResource MutedTextBrush}" /><TextBlock Text="{Binding Security.PluginSecurity}" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource AccentBrush}" Margin="0,6,0,0" /></StackPanel>
+              <StackPanel Grid.Column="2"><TextBlock Text="CREDENTIALS" FontSize="10" Foreground="{StaticResource MutedTextBrush}" /><TextBlock Text="{Binding Security.CredentialStorage}" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource AccentBrush}" Margin="0,6,0,0" /></StackPanel>
+              <StackPanel Grid.Column="3"><TextBlock Text="UPDATES" FontSize="10" Foreground="{StaticResource MutedTextBrush}" /><TextBlock Text="{Binding Security.UpdateSecurity}" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource AccentBrush}" Margin="0,6,0,0" /></StackPanel>
+            </Grid>
+          </Border>
+
+          <TextBlock Text="PRIVACY" FontSize="12" FontWeight="Bold" Foreground="{StaticResource MutedTextBrush}" Margin="0,24,0,12" />
+          <Border Background="{StaticResource PanelBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="14">
+            <StackPanel Orientation="Horizontal">
+              <CheckBox Content="Optional analytics" IsChecked="{Binding AnalyticsEnabled}" Foreground="{StaticResource TextBrush}" FontSize="13" Margin="0,0,28,0" VerticalContentAlignment="Center" />
+              <CheckBox Content="Crash reports" IsChecked="{Binding CrashReportsEnabled}" Foreground="{StaticResource TextBrush}" FontSize="13" VerticalContentAlignment="Center" />
+            </StackPanel>
+          </Border>
+        </StackPanel>
+      </ScrollViewer>
+
+      <Border Grid.Row="3" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,1,0,0" Padding="0,16,0,0" Margin="0,20,0,0">
+        <StackPanel>
+          <TextBlock Text="{Binding Notice}" Foreground="{StaticResource MutedTextBrush}" FontSize="12" TextWrapping="Wrap" />
+          <TextBlock Text="{Binding SaveStatus}" Foreground="{StaticResource MutedTextBrush}" FontSize="11" Margin="0,5,0,0" />
+        </StackPanel>
+      </Border>
+    </Grid>
+  </Grid>
+</Window>
