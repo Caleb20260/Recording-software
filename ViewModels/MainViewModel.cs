@@ -11,6 +11,7 @@ namespace LubbInteractiveCreator.ViewModels;
 public sealed class MainViewModel : INotifyPropertyChanged
 {
     private readonly IProjectService projectService = new ProjectService();
+    private readonly FfmpegRecordingEngine recordingEngine = new();
     private Project project = new();
     private string notice = "Ready to create your first project.";
     private string? projectPath;
@@ -18,12 +19,15 @@ public sealed class MainViewModel : INotifyPropertyChanged
     private bool crashReportsEnabled;
     private Scene? selectedScene;
     private string sceneNameDraft = "Gaming";
+    private string recordingStatus = "READY";
+    private RecordingSettings recordingSettings = new();
 
     public event PropertyChangedEventHandler? PropertyChanged;
     public Project Project { get => project; private set { project = value; OnPropertyChanged(); OnPropertyChanged(nameof(ProjectName)); } }
     public string ProjectName => Project.Name;
     public string Notice { get => notice; private set { notice = value; OnPropertyChanged(); } }
-    public string RecordingStatus => "READY";
+    public string RecordingStatus => recordingStatus;
+    public RecordingSettings RecordingSettings => recordingSettings;
     public string StreamingStatus => "OFFLINE";
     public string ReplayStatus => "NOT CONFIGURED";
     public string XboxStatus => "OFFLINE";
@@ -51,12 +55,16 @@ public sealed class MainViewModel : INotifyPropertyChanged
     public ICommand RenameSceneCommand { get; }
     public ICommand DeleteSceneCommand { get; }
     public ICommand AddSourceCommand { get; }
+    public ICommand PauseRecordingCommand { get; }
+    public ICommand StopRecordingCommand { get; }
 
     public MainViewModel()
     {
         NewProjectCommand = new RelayCommand(NewProject);
         SaveProjectCommand = new AsyncRelayCommand(SaveProjectAsync);
-        StartRecordingCommand = new RelayCommand(() => Notice = "Recording is unavailable until a Windows capture device and encoder are configured.");
+        StartRecordingCommand = new AsyncRelayCommand(StartRecordingAsync);
+        PauseRecordingCommand = new AsyncRelayCommand(PauseRecordingAsync);
+        StopRecordingCommand = new AsyncRelayCommand(StopRecordingAsync);
         GoLiveCommand = new RelayCommand(() => Notice = "Streaming is unavailable until a stream provider and secure credentials are configured.");
         ConnectXboxCommand = new RelayCommand(() => Notice = "Xbox integration is optional and requires an approved capture-device workflow.");
         ConnectDiscordCommand = new RelayCommand(() => Notice = "Discord uses official OAuth and is not connected.");
@@ -69,6 +77,11 @@ public sealed class MainViewModel : INotifyPropertyChanged
         DeleteSceneCommand = new RelayCommand(DeleteScene);
         AddSourceCommand = new RelayCommand(parameter => AddSource(parameter as string ?? "Source"));
         SelectedScene = Project.Scenes.FirstOrDefault();
+        recordingEngine.StatusChanged += (_, message) =>
+        {
+            Notice = message;
+            if (!recordingEngine.IsRecording) SetRecordingStatus("READY");
+        };
     }
 
     private void NewProject()
@@ -174,6 +187,46 @@ public sealed class MainViewModel : INotifyPropertyChanged
         {
             Notice = "Project could not be saved because Windows denied access to that location.";
         }
+    }
+
+    private async Task StartRecordingAsync()
+    {
+        try
+        {
+            await recordingEngine.StartAsync(RecordingSettings);
+            SetRecordingStatus("RECORDING");
+            Notice = $"Recording to {Path.GetFileName(recordingEngine.OutputPath)}.";
+        }
+        catch (Exception exception) when (exception is InvalidOperationException or FileNotFoundException or DirectoryNotFoundException)
+        {
+            SetRecordingStatus("READY");
+            Notice = exception.Message;
+        }
+    }
+
+    private async Task PauseRecordingAsync()
+    {
+        await recordingEngine.PauseAsync();
+        SetRecordingStatus(recordingEngine.IsPaused ? "PAUSED" : "RECORDING");
+    }
+
+    private async Task StopRecordingAsync()
+    {
+        try
+        {
+            await recordingEngine.StopAsync();
+            SetRecordingStatus("READY");
+        }
+        catch (InvalidOperationException exception)
+        {
+            Notice = exception.Message;
+        }
+    }
+
+    private void SetRecordingStatus(string value)
+    {
+        recordingStatus = value;
+        OnPropertyChanged(nameof(RecordingStatus));
     }
 
     private void OnPropertyChanged([CallerMemberName] string? name = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));

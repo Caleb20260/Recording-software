@@ -1,5 +1,5 @@
 PackageIdentifier: LubbInteractive.LubbInteractiveCreator
-PackageVersion: 0.2.1
+PackageVersion: 0.3.0
 PackageLocale: en-US
 Publisher: Lubb Interactive
 PublisherUrl: https://github.com/Caleb20260/Recording-software
@@ -15,7 +15,7 @@ Tags:
 InstallerType: exe
 Installers:
 - Architecture: x64
-  InstallerUrl: https://REPLACE-WITH-PUBLISHED-HTTPS-URL/LubbInteractiveCreatorSetup-0.2.0.exe
+  InstallerUrl: https://REPLACE-WITH-PUBLISHED-HTTPS-URL/LubbInteractiveCreatorSetup-0.3.0.exe
   InstallerSha256: REPLACE_WITH_SHA256
 ManifestType: singleton
 ManifestVersion: 1.6.0

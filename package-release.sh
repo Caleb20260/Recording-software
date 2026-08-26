@@ -2,7 +2,7 @@
 set -euo pipefail
 
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-version="0.2.1"
+version="0.3.0"
 output="$root/artifacts/publish/win-x64"
 package="$root/artifacts/LubbInteractiveCreator-${version}-win-x64.zip"
 

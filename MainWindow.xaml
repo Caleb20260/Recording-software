@@ -96,6 +96,8 @@
               <TextBlock Text="QUICK ACTIONS" FontSize="12" FontWeight="Bold" Foreground="{StaticResource MutedTextBrush}" Margin="0,0,0,12" />
               <WrapPanel>
                 <Button Content="START RECORDING" Command="{Binding StartRecordingCommand}" Background="{StaticResource AccentBrush}" Foreground="#0D1115" BorderThickness="0" />
+                <Button Content="PAUSE / RESUME" Command="{Binding PauseRecordingCommand}" />
+                <Button Content="STOP" Command="{Binding StopRecordingCommand}" />
                 <Button Content="GO LIVE" Command="{Binding GoLiveCommand}" />
                 <Button Content="SAVE REPLAY" Command="{Binding SaveReplayCommand}" />
                 <Button Content="CREATE CLIP" Command="{Binding CreateClipCommand}" />
@@ -113,6 +115,28 @@
               </Border>
             </StackPanel>
           </Grid>
+
+          <TextBlock Text="RECORDING ENGINE" FontSize="12" FontWeight="Bold" Foreground="{StaticResource MutedTextBrush}" Margin="0,30,0,12" />
+          <Border Background="{StaticResource PanelBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="18">
+            <Grid>
+              <Grid.RowDefinitions><RowDefinition /><RowDefinition /><RowDefinition /><RowDefinition /></Grid.RowDefinitions>
+              <Grid.ColumnDefinitions><ColumnDefinition Width="120" /><ColumnDefinition Width="*" /><ColumnDefinition Width="120" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+              <TextBlock Grid.Row="0" Grid.Column="0" Text="FFMPEG PATH" Foreground="{StaticResource MutedTextBrush}" VerticalAlignment="Center" FontSize="11" />
+              <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding RecordingSettings.FfmpegPath, UpdateSourceTrigger=PropertyChanged}" Padding="7" Margin="8,3,18,3" Background="{StaticResource PanelRaisedBrush}" Foreground="{StaticResource TextBrush}" BorderBrush="{StaticResource BorderBrush}" />
+              <TextBlock Grid.Row="0" Grid.Column="2" Text="OUTPUT FOLDER" Foreground="{StaticResource MutedTextBrush}" VerticalAlignment="Center" FontSize="11" />
+              <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding RecordingSettings.OutputDirectory, UpdateSourceTrigger=PropertyChanged}" Padding="7" Margin="8,3,0,3" Background="{StaticResource PanelRaisedBrush}" Foreground="{StaticResource TextBrush}" BorderBrush="{StaticResource BorderBrush}" />
+              <TextBlock Grid.Row="1" Grid.Column="0" Text="WIDTH" Foreground="{StaticResource MutedTextBrush}" VerticalAlignment="Center" FontSize="11" />
+              <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding RecordingSettings.Width, UpdateSourceTrigger=PropertyChanged}" Padding="7" Margin="8,3,18,3" Background="{StaticResource PanelRaisedBrush}" Foreground="{StaticResource TextBrush}" BorderBrush="{StaticResource BorderBrush}" />
+              <TextBlock Grid.Row="1" Grid.Column="2" Text="HEIGHT" Foreground="{StaticResource MutedTextBrush}" VerticalAlignment="Center" FontSize="11" />
+              <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding RecordingSettings.Height, UpdateSourceTrigger=PropertyChanged}" Padding="7" Margin="8,3,0,3" Background="{StaticResource PanelRaisedBrush}" Foreground="{StaticResource TextBrush}" BorderBrush="{StaticResource BorderBrush}" />
+              <TextBlock Grid.Row="2" Grid.Column="0" Text="FPS" Foreground="{StaticResource MutedTextBrush}" VerticalAlignment="Center" FontSize="11" />
+              <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding RecordingSettings.FramesPerSecond, UpdateSourceTrigger=PropertyChanged}" Padding="7" Margin="8,3,18,3" Background="{StaticResource PanelRaisedBrush}" Foreground="{StaticResource TextBrush}" BorderBrush="{StaticResource BorderBrush}" />
+              <TextBlock Grid.Row="2" Grid.Column="2" Text="BITRATE KBPS" Foreground="{StaticResource MutedTextBrush}" VerticalAlignment="Center" FontSize="11" />
+              <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding RecordingSettings.VideoBitrateKbps, UpdateSourceTrigger=PropertyChanged}" Padding="7" Margin="8,3,0,3" Background="{StaticResource PanelRaisedBrush}" Foreground="{StaticResource TextBrush}" BorderBrush="{StaticResource BorderBrush}" />
+              <TextBlock Grid.Row="3" Grid.Column="0" Text="MIC DEVICE" Foreground="{StaticResource MutedTextBrush}" VerticalAlignment="Center" FontSize="11" />
+              <TextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding RecordingSettings.MicrophoneDevice, UpdateSourceTrigger=PropertyChanged}" Padding="7" Margin="8,3,0,3" Background="{StaticResource PanelRaisedBrush}" Foreground="{StaticResource TextBrush}" BorderBrush="{StaticResource BorderBrush}" />
+            </Grid>
+          </Border>
 
           <TextBlock Text="SCENE BUILDER" FontSize="12" FontWeight="Bold" Foreground="{StaticResource MutedTextBrush}" Margin="0,30,0,12" />
           <Grid>
