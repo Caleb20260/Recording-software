@@ -2,7 +2,7 @@ $ErrorActionPreference = 'Stop'
 
 $project = Join-Path $PSScriptRoot 'LubbInteractiveCreator.csproj'
 $output = Join-Path $PSScriptRoot 'artifacts\publish\win-x64'
-$package = Join-Path $PSScriptRoot 'artifacts\LubbInteractiveCreator-0.2.0-win-x64.zip'
+$package = Join-Path $PSScriptRoot 'artifacts\LubbInteractiveCreator-0.2.1-win-x64.zip'
 
 dotnet publish $project -c Release -p:PublishProfile=win-x64
 if (Test-Path $package) { Remove-Item $package -Force }

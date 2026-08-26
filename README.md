@@ -57,11 +57,11 @@ builds Windows artifacts when a version tag is pushed.
 
 ## Release package
 
-The current release is `0.2.0`. On Windows, run `package-release.ps1` to produce
-`artifacts/LubbInteractiveCreator-0.2.0-win-x64.zip`. From Linux or CI, run
+The current release is `0.2.1`. On Windows, run `package-release.ps1` to produce
+`artifacts/LubbInteractiveCreator-0.2.1-win-x64.zip`. From Linux or CI, run
 `./package-release.sh` when the .NET SDK and `zip` are installed. This is a portable
 publish package. If Inno Setup is installed, either script also produces
-`artifacts/installer/LubbInteractiveCreatorSetup-0.2.0.exe`, with a visible setup
+`artifacts/installer/LubbInteractiveCreatorSetup-0.2.1.exe`, with a visible setup
 wizard, progress display, Start Menu shortcut, optional desktop shortcut, upgrade
 support, and uninstaller. The installer must be code-signed before production
 distribution.

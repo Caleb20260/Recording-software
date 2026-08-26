@@ -114,6 +114,57 @@
             </StackPanel>
           </Grid>
 
+          <TextBlock Text="SCENE BUILDER" FontSize="12" FontWeight="Bold" Foreground="{StaticResource MutedTextBrush}" Margin="0,30,0,12" />
+          <Grid>
+            <Grid.ColumnDefinitions><ColumnDefinition Width="220" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+            <Border Grid.Column="0" Background="{StaticResource PanelBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="12" Margin="0,0,14,0">
+              <DockPanel>
+                <StackPanel DockPanel.Dock="Bottom" Margin="0,12,0,0">
+                  <Button Content="NEW SCENE" Command="{Binding NewSceneCommand}" Background="{StaticResource AccentBrush}" Foreground="#0D1115" BorderThickness="0" />
+                  <Button Content="DUPLICATE" Command="{Binding DuplicateSceneCommand}" />
+                </StackPanel>
+                <ListBox ItemsSource="{Binding Scenes}" SelectedItem="{Binding SelectedScene}" Background="Transparent" BorderThickness="0" Foreground="{StaticResource TextBrush}">
+                  <ListBox.ItemTemplate>
+                    <DataTemplate>
+                      <TextBlock Text="{Binding Name}" Padding="8" FontSize="13" />
+                    </DataTemplate>
+                  </ListBox.ItemTemplate>
+                </ListBox>
+              </DockPanel>
+            </Border>
+            <Border Grid.Column="1" Background="{StaticResource PanelBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="18">
+              <StackPanel>
+                <TextBlock Text="SELECTED SCENE" FontSize="10" FontWeight="Bold" Foreground="{StaticResource AccentBrush}" />
+                <Grid Margin="0,8,0,14">
+                  <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                  <TextBox Grid.Column="0" Text="{Binding SceneNameDraft, UpdateSourceTrigger=PropertyChanged}" FontSize="15" Padding="8" Background="{StaticResource PanelRaisedBrush}" Foreground="{StaticResource TextBrush}" BorderBrush="{StaticResource BorderBrush}" />
+                  <Button Grid.Column="1" Content="RENAME" Command="{Binding RenameSceneCommand}" Margin="8,0,0,0" />
+                </Grid>
+                <TextBlock Text="SOURCES" FontSize="10" FontWeight="Bold" Foreground="{StaticResource MutedTextBrush}" />
+                <ListBox ItemsSource="{Binding SelectedScene.Sources}" Background="Transparent" BorderThickness="0" Margin="0,5,0,10" MinHeight="72">
+                  <ListBox.ItemTemplate>
+                    <DataTemplate>
+                      <Grid Margin="0,3">
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Name}" FontSize="13" />
+                        <TextBlock Grid.Column="1" Text="{Binding Type}" FontSize="11" Foreground="{StaticResource MutedTextBrush}" />
+                      </Grid>
+                    </DataTemplate>
+                  </ListBox.ItemTemplate>
+                </ListBox>
+                <WrapPanel>
+                  <Button Content="GAME CAPTURE" Command="{Binding AddSourceCommand}" CommandParameter="Game Capture" />
+                  <Button Content="DISPLAY" Command="{Binding AddSourceCommand}" CommandParameter="Display Capture" />
+                  <Button Content="WEBCAM" Command="{Binding AddSourceCommand}" CommandParameter="Camera" />
+                  <Button Content="MICROPHONE" Command="{Binding AddSourceCommand}" CommandParameter="Microphone" />
+                  <Button Content="IMAGE" Command="{Binding AddSourceCommand}" CommandParameter="Image" />
+                  <Button Content="BROWSER" Command="{Binding AddSourceCommand}" CommandParameter="Browser" />
+                </WrapPanel>
+                <TextBlock Text="{Binding SourceCount, StringFormat={}{0} sources in this scene}" FontSize="11" Foreground="{StaticResource MutedTextBrush}" Margin="0,4,0,0" />
+              </StackPanel>
+            </Border>
+          </Grid>
+
           <TextBlock Text="SECURITY CENTER" FontSize="12" FontWeight="Bold" Foreground="{StaticResource MutedTextBrush}" Margin="0,30,0,12" />
           <Border Background="{StaticResource PanelBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="18">
             <Grid>

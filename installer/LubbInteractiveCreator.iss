@@ -1,5 +1,5 @@
 #define AppName "Lubb Interactive Creator"
-#define AppVersion "0.2.0"
+#define AppVersion "0.2.1"
 #define Publisher "Lubb Interactive"
 #define AppExeName "LubbInteractiveCreator.exe"
 
